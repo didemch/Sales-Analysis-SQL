@@ -19,9 +19,10 @@ SELECT DISTINCT(CUSTOMERNAME)
 FROM sales_data;
 
 
+
 -- DATA ANALYSIS -- 
 
--- Among all product lines, which one has the highest sales? --
+-- QUESTION 1. Among all product lines, which one has the highest sales? --
 SELECT 
     PRODUCTLINE,
     ROUND(SUM(SALES), 3) as Revenue
@@ -33,7 +34,9 @@ ORDER BY
     Revenue DESC;
 -- As shown, Classic Cars is the leading product line in terms of sales, while Trains exhibits the lowest sales among the product lines.
 
--- Which year recorded the highest sales? --
+
+
+-- QUESTION 2. Which year recorded the highest sales? --
 SELECT 
     YEAR_ID as Year,
     ROUND(SUM(SALES), 3) as Revenue
@@ -45,7 +48,9 @@ ORDER BY
     Revenue DESC;
 --  It can be seen that 2004 has the highest sales. And 2005 stands out with the lowest sales.
 
--- Why did the sales dip in 2005? --
+
+
+-- QUESTION 2A. Why did the sales dip in 2005? --
 SELECT 
     YEAR_ID as Year,
     MONTH_ID as Month
@@ -57,7 +62,9 @@ ORDER BY
     Year ASC, CAST(Month AS UNSIGNED) ASC;
 --  Sales data were only recorded for the first 5 months of 2005, in contrast to 2003 and 2004, which have sales data recorded for all 12 months.
 
--- Which month experienced the highest sales? What was the revenue during that month? --
+
+
+-- QUESTION 3. Which month experienced the highest sales? What was the revenue during that month? --
 SELECT
     MONTH_ID,
     PRODUCTLINE,
@@ -89,7 +96,9 @@ ORDER BY
 -- Classic Cars is the product line that sold the most in November of 2003 and 2004. 
 -- Trains, as in the question 1, remains the product line with the smallest sales.
 
--- Which country achieved the highest product sales? -- 
+
+
+-- QUESTION 4. Which country achieved the highest product sales? -- 
 SELECT 
     COUNTRY,
     ROUND(SUM(SALES), 3) as Revenue
@@ -102,7 +111,9 @@ ORDER BY
 -- United States achieved the highest product sales, generating a revenue of $3,627,982.83. 
 -- Following USA, Spain and France secured the second and third positions respectively
 
--- Who stands out as the top customer? --
+
+
+-- QUESTION 5. Who stands out as the top customer? --
 
 -- Convert string dates to date data types
 UPDATE sales_data
@@ -138,7 +149,9 @@ ORDER BY
 -- "Euro Shopping Channel" and "Mini Gifts Distributors Ltd." have made significant monetary contributions. 
 -- "Boards & Toys Co." and "Atelier graphique" have lower total spending.sales_datasales_data
 
--- What products are usually sold together? --
+
+
+-- QUESTION 6. What products are usually sold together? --
 WITH TransactionItems AS (
     -- Identifying transaction items (products) for each order along with product line
     SELECT s.ORDERNUMBER, s.PRODUCTCODE, s.PRODUCTLINE
